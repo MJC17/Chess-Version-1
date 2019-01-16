@@ -14,18 +14,18 @@ public class Queen extends Piece {
     }
 
     @Override
-    public void findValidMoves(Piece[][] board, int[][] possibleMoves, int currentX, int currentY) {
-        super.findValidMoves(board, possibleMoves, currentX, currentY);
+    public void findValidMoves(Piece[][] board, int[][] possibleMoves, int currentX, int currentY, int num) {
+        super.findValidMoves(board, possibleMoves, currentX, currentY, num);
 
-        checkPossiblePath(board, possibleMoves, currentX, currentY, 0,1);
-        checkPossiblePath(board, possibleMoves, currentX, currentY, 1,0);
-        checkPossiblePath(board, possibleMoves, currentX, currentY, 0,-1);
-        checkPossiblePath(board, possibleMoves, currentX, currentY, -1,0);
+        checkPossiblePath(board, possibleMoves, currentX, currentY, 0,1, num);
+        checkPossiblePath(board, possibleMoves, currentX, currentY, 1,0, num);
+        checkPossiblePath(board, possibleMoves, currentX, currentY, 0,-1, num);
+        checkPossiblePath(board, possibleMoves, currentX, currentY, -1,0, num);
 
-        checkPossiblePath(board, possibleMoves, currentX, currentY, 1,1);
-        checkPossiblePath(board, possibleMoves, currentX, currentY, -1,1);
-        checkPossiblePath(board, possibleMoves, currentX, currentY, -1,-1);
-        checkPossiblePath(board, possibleMoves, currentX, currentY, 1,-1);
+        checkPossiblePath(board, possibleMoves, currentX, currentY, 1,1, num);
+        checkPossiblePath(board, possibleMoves, currentX, currentY, -1,1, num);
+        checkPossiblePath(board, possibleMoves, currentX, currentY, -1,-1, num);
+        checkPossiblePath(board, possibleMoves, currentX, currentY, 1,-1, num);
 
     }
 }

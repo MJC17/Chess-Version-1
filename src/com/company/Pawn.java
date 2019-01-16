@@ -22,33 +22,33 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public void findValidMoves(Piece[][] board, int[][] possibleMoves, int currentX, int currentY) {
-        super.findValidMoves(board, possibleMoves, currentX, currentY);
+    public void findValidMoves(Piece[][] board, int[][] possibleMoves, int currentX, int currentY, int num) {
+        super.findValidMoves(board, possibleMoves, currentX, currentY, num);
 
         try{
         if (board[currentX][currentY + (direction * 1)] == null) {
 
-            checkSinglePossiblePos(board, possibleMoves, currentX, currentY, 0, 1);
+            checkSinglePossiblePos(board, possibleMoves, currentX, currentY, 0, 1, num);
 
         }   }catch (ArrayIndexOutOfBoundsException e){}
 
         try{
         if (board[currentX][currentY + (direction * 1)] == null && board[currentX][currentY + (direction * 2)] == null && numMoves == 0) {
 
-            checkSinglePossiblePos(board, possibleMoves, currentX, currentY,0, 2);
+            checkSinglePossiblePos(board, possibleMoves, currentX, currentY,0, 2, num);
         }   }catch (ArrayIndexOutOfBoundsException e){}
 
 
         // Up Left
         try{
         if (board[currentX + (direction * 1)][currentY + (direction * 1)] != null && !board[currentX+ (direction * 1)][currentY+ (direction * 1)].getColor().equalsIgnoreCase(this.color)) {
-            checkSinglePossiblePos(board, possibleMoves, currentX, currentY,1,1);
+            checkSinglePossiblePos(board, possibleMoves, currentX, currentY,1,1, num);
         }
         }catch (ArrayIndexOutOfBoundsException e){}
         // Up Right
         try{
         if (board[currentX + (direction * -1)][currentY + (direction * 1)] != null && !board[currentX+ (direction * -1)][currentY+ (direction * 1)].getColor().equalsIgnoreCase(this.color)) {
-            checkSinglePossiblePos(board, possibleMoves, currentX, currentY,-1,1);
+            checkSinglePossiblePos(board, possibleMoves, currentX, currentY,-1,1, num);
         }
         }catch (ArrayIndexOutOfBoundsException e){}
     }

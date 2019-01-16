@@ -12,7 +12,8 @@ public class Piece {
     ImageIcon whitePieceImg;
     int numMoves = 0;
 
-    int xPos, yPos;
+    protected int x_coordinate;  // piece x coordinate
+    protected int y_coordinate;  // piece y coordinate
 
     public void initColor(String color){
 
@@ -31,47 +32,66 @@ public class Piece {
         img.paintIcon(c, g, xPos * tileSize, yPos * tileSize);
     }
 
-    public void findValidMoves(Piece[][] board, int[][] possibleMoves, int currentX, int currentY) {}
+    public void findValidMoves(Piece[][] board, int[][] possibleMoves, int currentX, int currentY, int num) {
+
+    }
+
+    public void findValidMoves(Piece[][] board, int[][] possibleMoves, int currentX, int currentY) {
+        findValidMoves(board,possibleMoves, currentX, currentY, this.direction);
+    }
 
     public void MovesPiece(int x, int y){
-        xPos = x;
-        yPos = y;
+        x_coordinate = x;
+        y_coordinate = y;
         numMoves ++;
+    }
+
+    public Point getCoordinate(){
+        return new Point(x_coordinate, y_coordinate);
     }
 
     public String getColor() {
         return color;
     }
 
-    void checkPossiblePath(Piece[][] board, int[][] possibleMoves, int currentX, int currentY, int xOffset, int yOffset){
+    void checkPossiblePath(Piece[][] board, int[][] possibleMoves, int currentX, int currentY, int xOffset, int yOffset, int num){
 
         try {
 
-            if (board[currentX + (direction * xOffset)][currentY + (direction * yOffset)] == null && possibleMoves[currentX + (direction * xOffset)][currentY + (direction * yOffset)] != (direction * -1)){
-                possibleMoves[currentX + (direction * xOffset)][currentY + (direction * yOffset)] = this.direction;
-                checkPossiblePath(board, possibleMoves, currentX + (direction * xOffset), currentY+ (direction * yOffset), xOffset, yOffset);
+            if (board[currentX + (direction * xOffset)][currentY + (direction * yOffset)] == null && possibleMoves[currentX + (direction * xOffset)][currentY + (direction * yOffset)] != direction){
+                possibleMoves[currentX + (direction * xOffset)][currentY + (direction * yOffset)] = num;
+                checkPossiblePath(board, possibleMoves, currentX + (direction * xOffset), currentY+ (direction * yOffset), xOffset, yOffset, num);
 
-            }else if (!board[currentX+ (direction * xOffset)][currentY+ (direction * yOffset)].getColor().equalsIgnoreCase(this.color) && possibleMoves[currentX + (direction * xOffset)][currentY + (direction * yOffset)] != (direction * -1)){
-                possibleMoves[currentX + (direction * xOffset)][currentY+ (direction * yOffset)] = this.direction;
+            }else if (!board[currentX+ (direction * xOffset)][currentY+ (direction * yOffset)].getColor().equalsIgnoreCase(this.color) && possibleMoves[currentX + (direction * xOffset)][currentY + (direction * yOffset)] != direction){
+                possibleMoves[currentX + (direction * xOffset)][currentY+ (direction * yOffset)] = num;
 
             }
 
         }catch (ArrayIndexOutOfBoundsException e){}
     }
 
+    void checkPossiblePath(Piece[][] board, int[][] possibleMoves, int currentX, int currentY, int xOffset, int yOffset){
+        checkPossiblePath(board, possibleMoves, currentX, currentY, xOffset, yOffset, this.direction);
+    }
 
-    void checkSinglePossiblePos(Piece[][] board, int[][] possibleMoves, int currentX, int currentY, int xOffset, int yOffset){
+
+
+    void checkSinglePossiblePos(Piece[][] board, int[][] possibleMoves, int currentX, int currentY, int xOffset, int yOffset, int num){
 
         try {
 
-            if (board[currentX + (direction * xOffset)][currentY + (direction * yOffset)] == null && possibleMoves[currentX + (direction * xOffset)][currentY + (direction * yOffset)] != (direction * -1)){
-                possibleMoves[currentX + (direction * xOffset)][currentY + (direction * yOffset)] = this.direction;
+            if (board[currentX + (direction * xOffset)][currentY + (direction * yOffset)] == null && possibleMoves[currentX + (direction * xOffset)][currentY + (direction * yOffset)] != direction ){
+                possibleMoves[currentX + (direction * xOffset)][currentY + (direction * yOffset)] = num;
 
-            }else if (!board[currentX+ (direction * xOffset)][currentY+ (direction * yOffset)].getColor().equalsIgnoreCase(this.color) && possibleMoves[currentX + (direction * xOffset)][currentY + (direction * yOffset)] != (direction * -1)){
-                possibleMoves[currentX + (direction * xOffset)][currentY+ (direction * yOffset)] = this.direction;
+            }else if (!board[currentX+ (direction * xOffset)][currentY+ (direction * yOffset)].getColor().equalsIgnoreCase(this.color) && possibleMoves[currentX + (direction * xOffset)][currentY + (direction * yOffset)] != direction){
+                possibleMoves[currentX + (direction * xOffset)][currentY+ (direction * yOffset)] = num;
 
             }
 
         }catch (ArrayIndexOutOfBoundsException e){}
+    }
+
+    void checkSinglePossiblePos(Piece[][] board, int[][] possibleMoves, int currentX, int currentY, int xOffset, int yOffset){
+        checkSinglePossiblePos(board, possibleMoves, currentX, currentY, xOffset, yOffset, this.direction);
     }
 }

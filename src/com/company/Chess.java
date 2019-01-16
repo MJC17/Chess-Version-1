@@ -37,7 +37,7 @@ public class Chess extends JPanel implements MouseListener {
         super.paintComponent(g);
 
 
-        gameBoard.drawBored(this, g);
+        gameBoard.drawChessboard(this, g);
     }
 
     void clearScreen(Graphics g){
@@ -50,7 +50,7 @@ public class Chess extends JPanel implements MouseListener {
 
         clearScreen(getGraphics());
         gameBoard.checkPossibleMove(e.getPoint());
-        gameBoard.drawBored(this, getGraphics());
+        gameBoard.drawChessboard(this, getGraphics());
 
 
     }

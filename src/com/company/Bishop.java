@@ -14,13 +14,11 @@ public class Bishop extends Piece {
     }
 
     @Override
-    public void findValidMoves(Piece[][] board, int[][] possibleMoves, int currentX, int currentY) {
-        super.findValidMoves(board, possibleMoves, currentX, currentY);
-
-        checkPossiblePath(board, possibleMoves, currentX, currentY, 1,1);
-        checkPossiblePath(board, possibleMoves, currentX, currentY, -1,1);
-        checkPossiblePath(board, possibleMoves, currentX, currentY, -1,-1);
-        checkPossiblePath(board, possibleMoves, currentX, currentY, 1,-1);
-
+    public void findValidMoves(Piece[][] board, int[][] possibleMoves, int currentX, int currentY, int num) {
+        super.findValidMoves(board, possibleMoves, currentX, currentY, num);
+        checkPossiblePath(board, possibleMoves, currentX, currentY, 1,1, num);
+        checkPossiblePath(board, possibleMoves, currentX, currentY, -1,1, num);
+        checkPossiblePath(board, possibleMoves, currentX, currentY, -1,-1, num);
+        checkPossiblePath(board, possibleMoves, currentX, currentY, 1,-1, num);
     }
 }
