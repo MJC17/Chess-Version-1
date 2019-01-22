@@ -5,8 +5,10 @@ import java.awt.*;
 
 public class Knight extends Piece {
 
+    // init
     public Knight(String color){
 
+        // setting the objects color images
         this.blackPieceImg = new ImageIcon(getClass().getResource("/com/company/Sprites/blackKnight.png"));
         this.whitePieceImg = new ImageIcon(getClass().getResource("/com/company/Sprites/whiteKnight.png"));
 

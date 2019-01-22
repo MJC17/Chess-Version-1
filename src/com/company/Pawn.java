@@ -1,18 +1,19 @@
 package com.company;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class Pawn extends Piece {
 
     int endPoint;
 
+    // init
     public Pawn(String color){
 
         this.blackPieceImg = new ImageIcon(getClass().getResource("/com/company/Sprites/blackPawn.png"));
         this.whitePieceImg = new ImageIcon(getClass().getResource("/com/company/Sprites/whitePawn.png"));
         initColor(color);
 
+        // setting the y endpoints to cha˜˜e the pawn into a new piece
         if (this.color.equalsIgnoreCase("black")){
             endPoint = 0;
 
@@ -26,26 +27,32 @@ public class Pawn extends Piece {
         super.findValidMoves(board, possibleMoves, currentX, currentY, num);
 
         try{
-        if (board[currentX][currentY + (direction * 1)] == null) {
+            // moving 1 up
+            if (board[currentX][currentY + (direction * 1)] == null) {
 
-            checkSinglePossiblePos(board, possibleMoves, currentX, currentY, 0, 1, num);
+                checkSinglePossiblePos(board, possibleMoves, currentX, currentY, 0, 1, num);
 
-        }   }catch (ArrayIndexOutOfBoundsException e){}
-
-        try{
-        if (board[currentX][currentY + (direction * 1)] == null && board[currentX][currentY + (direction * 2)] == null && numMoves == 0) {
-
-            checkSinglePossiblePos(board, possibleMoves, currentX, currentY,0, 2, num);
-        }   }catch (ArrayIndexOutOfBoundsException e){}
-
-
-        // Up Left
-        try{
-        if (board[currentX + (direction * 1)][currentY + (direction * 1)] != null && !board[currentX+ (direction * 1)][currentY+ (direction * 1)].getColor().equalsIgnoreCase(this.color)) {
-            checkSinglePossiblePos(board, possibleMoves, currentX, currentY,1,1, num);
-        }
+            }
         }catch (ArrayIndexOutOfBoundsException e){}
-        // Up Right
+
+        try{
+            // moving 2 up
+            if (board[currentX][currentY + (direction * 1)] == null && board[currentX][currentY + (direction * 2)] == null && numMoves == 0) {
+
+                checkSinglePossiblePos(board, possibleMoves, currentX, currentY,0, 2, num);
+            }
+        }catch (ArrayIndexOutOfBoundsException e){}
+
+
+        // Up Left for a kill
+        try{
+            if (board[currentX + (direction * 1)][currentY + (direction * 1)] != null && !board[currentX+ (direction * 1)][currentY+ (direction * 1)].getColor().equalsIgnoreCase(this.color)) {
+                checkSinglePossiblePos(board, possibleMoves, currentX, currentY,1,1, num);
+            }
+        }catch (ArrayIndexOutOfBoundsException e){}
+
+
+        // Up Right for a kill
         try{
         if (board[currentX + (direction * -1)][currentY + (direction * 1)] != null && !board[currentX+ (direction * -1)][currentY+ (direction * 1)].getColor().equalsIgnoreCase(this.color)) {
             checkSinglePossiblePos(board, possibleMoves, currentX, currentY,-1,1, num);
@@ -54,11 +61,16 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public void MovesPiece(int x, int y) {
-        super.MovesPiece(x, y);
+    public void movePiece(Piece[][] board, int x, int y) {
+        super.movePiece(board, x, y);
 
         if (y == endPoint){
-            System.out.println("Change Player");
+//            was not able to get the pawn promotion to work
+//            Piece newPiece = new PawnPromotionWindow().pawnPromotion(board[x][y].color);
+//            board[x][y] = newPiece;
+
+//            set the pawn promotion default to a Queen
+            board[x][y] = new Queen(this.color);
         }
     }
 }
